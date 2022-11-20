@@ -5,6 +5,8 @@ import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
+import { Link } from "react-router-dom";
+
 const theme = createTheme({
   components: {
     // Name of the component
@@ -79,9 +81,11 @@ function Login() {
           </Grid>
 
           <Grid item xs={12}>
-            <Button variant="contained" color="success" fullWidth>
-              Login
-            </Button>
+            <Link to='home'>
+              <Button variant="contained" color="success" fullWidth>
+                Login
+              </Button>
+            </Link>
           </Grid>
         </Grid>
       </Grid>
