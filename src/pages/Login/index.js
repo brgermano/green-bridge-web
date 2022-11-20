@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
@@ -36,6 +36,9 @@ const theme = createTheme({
 });
 
 function Login() {
+  const [user, setUser] = useState('');
+  const [pass, setPass] = useState('');
+
   return (
     <ThemeProvider theme={theme}>
       <Grid 
@@ -58,6 +61,8 @@ function Login() {
               label="CPF/CNPJ"
               variant="outlined"
               fullWidth
+              value={user}
+              onChange={(e) => { setUser(e.target.value) }}
             />
           </Grid>
 
@@ -68,6 +73,8 @@ function Login() {
               variant="outlined" 
               type="password"
               fullWidth 
+              value={pass}
+              onChange={(e) => { setPass(e.target.value) }}
             />
           </Grid>
 
