@@ -5,7 +5,8 @@ import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import getLogin from './services';
 
 const theme = createTheme({
   components: {
@@ -40,6 +41,44 @@ const theme = createTheme({
 function Login() {
   const [user, setUser] = useState('');
   const [pass, setPass] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  function SubmitButton() {
+    const navigate = useNavigate();
+
+    const redirectToHome = () => navigate('/home');
+
+    return (
+      <Grid item xs={12}>
+        <Button 
+          variant="contained"
+          color="success"
+          fullWidth
+          onClick={() => fetchLogin(redirectToHome)}
+          disabled={loading}
+        >
+          Login
+        </Button>
+      </Grid>
+    )
+  }
+
+  async function fetchLogin(callback) {
+    setLoading(true);
+
+    const status = await getLogin({ user, pass });
+
+    if (status === 200) {
+      console.log('login sucesso')
+
+      callback()
+    } else {
+      setIsError(true);
+    }
+
+    return setLoading(false);
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -60,10 +99,11 @@ function Login() {
           <Grid item xs={12}>
             <TextField 
               id="outlined-email"
-              label="CPF/CNPJ"
+              label="E-mail"
               variant="outlined"
               fullWidth
               value={user}
+              error={isError}
               onChange={(e) => { setUser(e.target.value) }}
             />
           </Grid>
@@ -76,17 +116,16 @@ function Login() {
               type="password"
               fullWidth 
               value={pass}
+              error={isError}
               onChange={(e) => { setPass(e.target.value) }}
             />
           </Grid>
 
-          <Grid item xs={12}>
-            <Link to='home'>
-              <Button variant="contained" color="success" fullWidth>
-                Login
-              </Button>
-            </Link>
-          </Grid>
+          {isError && (
+            <p style={ {color: 'red' }}>Login ou senha incorretos!</p>
+          )}
+
+          <SubmitButton />
         </Grid>
       </Grid>
     </ThemeProvider>
