@@ -1,0 +1,32 @@
+.home-container {
+  margin: 50px;
+}
+
+.balance-box {
+  background: #31a073;
+  width: 299px;
+  color: #fff;
+  padding: 2px 24px;
+  border-radius: 15px;
+  font-weight: 500;
+}
+
+.home-card {
+  box-shadow: 4px 1px 11px #afafaf;
+  height: 120px;
+  width: 60%;
+  border-radius: 14px;
+}
+
+.home-card-left {
+  float: left;
+  margin-right: 20px;
+}
+
+.home-card-right {
+  padding-top: 5px;
+}
+
+.home-card-right h2 {
+  margin-top: 10px;
+}

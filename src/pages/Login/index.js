@@ -91,7 +91,7 @@ function Login() {
       >
         <Grid item xs={4}>
           <Grid item xs={12}>
-            <Typography variant="h2" align="center" component="h2">
+            <Typography variant="h3" align="center" component="h3">
               Bem-vindo
             </Typography>
           </Grid>
@@ -122,7 +122,7 @@ function Login() {
           </Grid>
 
           {isError && (
-            <p style={ {color: 'red' }}>Login ou senha incorretos!</p>
+            <p style={ {color: 'red' }}>Email ou senha incorretos.</p>
           )}
 
           <SubmitButton />
