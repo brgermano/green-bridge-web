@@ -7,3 +7,10 @@ export function getBalance() {
     .then(response => response.data)
     .catch((e) => console.warn('getBalance error: ', e))
 }
+
+export function getProjects() {
+  return axios
+    .get('http://localhost:3003/projects')
+    .then(response => response.data)
+    .catch((e) => console.warn('getProjects error: ', e))
+}

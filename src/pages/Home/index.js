@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getBalance } from './services';
+import { getBalance, getProjects } from './services';
 
 import './styles.css';
 
@@ -8,16 +8,19 @@ function Home() {
     balance: '',
     nome: '',
   })
+  const [projects, setProjects] = useState({ 
+    projects: []
+  })
 
   useEffect(() => {
     async function fetchUser() {
       const response = await getBalance();
+      const responseProjects = await getProjects();
 
-      if (response) {
+      if (response && responseProjects) {
         setUserData(response)
+        setProjects(responseProjects)
       }
-
-      console.log('response', response);
     }
     fetchUser();
   }, [])
@@ -32,21 +35,30 @@ function Home() {
 
       <h2>Conheça nossos projetos:</h2>
 
-      <div className='home-card'>
-        <div className='home-card-left'>
-          <img 
-            src='https://epa.aero/wp-content/uploads/magem-sp-negocios-img-002.jpg' 
-            alt="sp 1" 
-            height="120px"
-            width="100px"
-          />
-        </div>
+      {projects && projects.projects.length > 0 ? (
 
-        <div className='home-card-right'>
-          <h2>Projeto SP Verde</h2>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-        </div>
-      </div>
+        projects.projects.map(project => (
+          <div className='home-card'>
+            <div className='home-card-left'>
+              <img 
+                src='https://epa.aero/wp-content/uploads/magem-sp-negocios-img-002.jpg' 
+                alt="sp 1" 
+                height="120px"
+                width="100px"
+              />
+            </div>
+        
+            <div className='home-card-right'>
+              <h2>{project.name}</h2>
+              <p>{project.description}</p>
+            </div>
+          </div>
+        ))
+
+      ) : (
+        'No projects...'
+      )}
+
     </div>
   )
 }

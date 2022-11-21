@@ -16,6 +16,8 @@
   height: 120px;
   width: 60%;
   border-radius: 14px;
+  clear: both;
+  margin-bottom: 15px;
 }
 
 .home-card-left {
